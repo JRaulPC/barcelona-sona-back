@@ -6,8 +6,8 @@
   "scripts": {
     "prepare": "husky install",
     "test:dev": "jest --watch",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests"
   },
   "keywords": [],
   "author": "",
