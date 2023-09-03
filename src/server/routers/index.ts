@@ -1,17 +1,14 @@
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
+import morgan from "morgan";
+import corsOptions from "./corsOptions.js";
 
 export const app = express();
-app.disable("x-powered-by");
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:4000",
-      "https://raul-perez-final-project-202307-bcn.netlify.app/",
-    ],
-  }),
-);
+app.use(cors(corsOptions));
+app.use(morgan("dev"));
+
+app.disable("x-powered-by");
 
 export default app;
