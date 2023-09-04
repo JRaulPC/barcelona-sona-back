@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import CustomError from "../../../CustomError/CustomError";
-import { generalErrorHandler } from "../error";
+import { generalErrorHandler } from "../errors";
 
 const req: Partial<Request> = {};
 const res: Partial<Response> = {
