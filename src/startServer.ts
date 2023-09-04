@@ -1,6 +1,6 @@
-import debugCreator from "debug";
 import "dotenv/config";
-import app from "../index.js";
+import debugCreator from "debug";
+import app from "./server/app.js";
 
 const debug = debugCreator("spots:server");
 

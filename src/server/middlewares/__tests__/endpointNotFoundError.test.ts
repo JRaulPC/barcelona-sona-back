@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
 import CustomError from "../../../CustomError/CustomError";
-import { endpointNotFound } from "../error";
+import { endpointNotFound } from "../errors";
 
 const req: Partial<Request> = {};
 const res: Partial<Response> = {

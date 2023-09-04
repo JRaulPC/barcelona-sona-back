@@ -1,6 +1,6 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import request from "supertest";
-import app from "../../index.js";
+import app from "../server/app.js";
 
 let server: MongoMemoryServer;
 
