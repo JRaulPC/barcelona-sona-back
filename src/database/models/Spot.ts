@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { type SpotStructure } from "../../types";
 
 const spotSchema = new Schema<SpotStructure>({
@@ -24,4 +24,6 @@ const spotSchema = new Schema<SpotStructure>({
   },
 });
 
-export default spotSchema;
+const Spot = model("Spot", spotSchema, "spots");
+
+export default Spot;
