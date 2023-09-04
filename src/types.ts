@@ -4,6 +4,7 @@ export interface UserStructure {
 }
 
 export interface SpotStructure {
+  _id: string;
   name: string;
   imageUrl: string;
   opening: number;

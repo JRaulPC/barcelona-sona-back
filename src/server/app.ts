@@ -2,7 +2,7 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import morgan from "morgan";
-import pingController from "./controllers/Ping/PingController.js";
+import pingController from "./controllers/pingController/PingController.js";
 import { endpointNotFound, generalErrorHandler } from "./middlewares/errors.js";
 import corsOptions from "./corsOptions/corsOptions.js";
 
