@@ -1,6 +1,18 @@
+import cors from "cors";
 import "dotenv/config";
-import startServer from "./routers/startServer.js";
+import express from "express";
+import morgan from "morgan";
+import { generalErrorHandler } from "./middlewares/error.js";
+import corsOptions from "./routers/corsOptions.js";
 
-const port = process.env.PORT ?? 4000;
+export const app = express();
 
-startServer(+port);
+app.use(cors(corsOptions));
+app.use(morgan("dev"));
+app.disable("x-powered-by");
+
+app.use("/spots");
+
+app.use(generalErrorHandler);
+
+export default app;
