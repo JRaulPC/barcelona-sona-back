@@ -22,6 +22,10 @@ const spotSchema = new Schema<SpotStructure>({
     type: Boolean,
     required: true,
   },
+  user: {
+    type: String,
+    required: true,
+  },
 });
 
 const Spot = model("Spot", spotSchema, "spots");
