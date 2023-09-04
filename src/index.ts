@@ -1,8 +1,7 @@
 import "dotenv/config";
-
 import debugCreator from "debug";
 import connectToDatabase from "./database/connectToDatabase.js";
-import startServer from "./server/routers/startServer.js";
+import startServer from "./startServer.js";
 
 const debug = debugCreator("spots:server");
 
