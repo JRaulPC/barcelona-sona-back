@@ -4,17 +4,19 @@ import { type AuthRequest } from "../types";
 import { type NextFunction, type Response, type Request } from "express";
 import auth from "../auth";
 import CustomError from "../../../CustomError/CustomError";
+import { authIdMock, userMock } from "../../../mocks/spotsMock";
+import User from "../../../database/models/User";
 
 jest.mock("firebase-admin");
 
-const token: Partial<DecodedIdToken> = {};
+const next: NextFunction = jest.fn();
+const res: Partial<Response> = {};
+
+const token: Partial<DecodedIdToken> = { uid: authIdMock };
 
 admin.auth = jest.fn().mockReturnValue({
   verifyIdToken: jest.fn().mockResolvedValue(token),
 });
-
-const next: NextFunction = jest.fn();
-const res: Partial<Response> = {};
 
 describe("Given an authentification middleware", () => {
   describe("When it receives a request with a validated token", () => {
@@ -22,6 +24,10 @@ describe("Given an authentification middleware", () => {
       const req: Partial<Request> = {
         header: jest.fn().mockReturnValue("Bearer token"),
       };
+
+      User.findOne = jest
+        .fn()
+        .mockReturnValue({ exec: jest.fn().mockResolvedValue(userMock) });
 
       await auth(req as AuthRequest, res as Response, next);
 
