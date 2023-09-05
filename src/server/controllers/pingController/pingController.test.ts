@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import pingController from "./PingController";
+import pingController from "./pingController.js";
 
 const req: Partial<Request> = {};
 const res: Partial<Response> = {
