@@ -3,6 +3,8 @@ import admin from "firebase-admin";
 import { type AuthRequest } from "./types";
 import CustomError from "../../CustomError/CustomError.js";
 import firebaseApp from "../../firebase.js";
+import User from "../../database/models/User";
+import { type UserStructure } from "../../types";
 
 const auth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
   try {
@@ -15,8 +17,11 @@ const auth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
     }
 
     const userData = await admin.auth(firebaseApp).verifyIdToken(token);
+    const { uid } = userData;
 
-    req.authId = userData.uid;
+    const user = await User.findOne<UserStructure>({ uid }).exec();
+
+    req.body = user?._id;
 
     next();
   } catch (error: unknown) {

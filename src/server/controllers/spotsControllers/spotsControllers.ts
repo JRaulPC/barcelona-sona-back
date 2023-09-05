@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
-import Spot from "../../../database/models/Spot";
-import CustomError from "../../../CustomError/CustomError";
+import Spot from "../../../database/models/Spot.js";
+import CustomError from "../../../CustomError/CustomError.js";
 
 export const getSpotsController = async (
   req: Request,

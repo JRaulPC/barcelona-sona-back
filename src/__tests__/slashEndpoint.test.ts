@@ -3,6 +3,7 @@ import request from "supertest";
 import app from "../server/app.js";
 import admin from "firebase-admin";
 import { type DecodedIdToken } from "firebase-admin/lib/auth/token-verifier.js";
+import { authIdMock } from "../mocks/spotsMock.js";
 
 let server: MongoMemoryServer;
 
@@ -10,7 +11,9 @@ jest.mock("firebase-admin");
 
 beforeAll(async () => {
   server = await MongoMemoryServer.create();
-  const token: Partial<DecodedIdToken> = {};
+  const token: Partial<DecodedIdToken> = {
+    uid: authIdMock,
+  };
 
   admin.auth = jest.fn().mockReturnValue({
     verifyIdToken: jest.fn().mockResolvedValue(token as DecodedIdToken),
