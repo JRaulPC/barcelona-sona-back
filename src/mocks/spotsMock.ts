@@ -2,10 +2,13 @@ import mongoose from "mongoose";
 import { type UserStructure, type SpotStructure } from "../types";
 
 const userIdMongo = new mongoose.Types.ObjectId().toString();
+export const authIdMock = new mongoose.Types.ObjectId().toString();
 
-export const userMock: UserStructure[] = [
-  { _id: userIdMongo, authId: "krhfiu24h5f7824h87", name: "Juan" },
-];
+export const userMock: UserStructure = {
+  _id: userIdMongo,
+  authId: authIdMock,
+  name: "Juan",
+};
 
 export const spotsMock: SpotStructure[] = [
   {
