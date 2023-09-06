@@ -6,7 +6,7 @@ export const authIdMock = new mongoose.Types.ObjectId().toString();
 
 export const userMock: UserStructure = {
   _id: userIdMongo,
-  authId: authIdMock,
+  uid: authIdMock,
   name: "Juan",
 };
 

@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import { type UserStructure } from "../../types";
 
 const userSchema = new Schema<UserStructure>({
-  authId: {
+  uid: {
     type: String,
     required: true,
   },
