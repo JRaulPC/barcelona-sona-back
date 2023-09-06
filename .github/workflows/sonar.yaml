@@ -18,10 +18,17 @@ jobs:
       - name: Coverage
         run: npm run test:coverage
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          FIREBASE_PROJECT_ID: ${{secrets.FIREBASE_PROJECT_ID}}
+          FIREBASE_PRIVATE_KEY: ${{secrets.FIREBASE_PRIVATE_KEY}}
+          FIREBASE_CLIENT_EMAIL: ${{secrets.CLIENT.EMAIL}}
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          FIREBASE_PROJECT_ID: ${{secrets.FIREBASE_PROJECT_ID}}
+          FIREBASE_PRIVATE_KEY: ${{secrets.FIREBASE_PRIVATE_KEY}}
+          FIREBASE_CLIENT_EMAIL: ${{secrets.CLIENT.EMAIL}}
