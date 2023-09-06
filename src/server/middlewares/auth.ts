@@ -11,7 +11,7 @@ const auth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
     const token = req.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
-      const error = new CustomError("Unauthorized", 401, "Token not provided");
+      const error = new CustomError("Token not provided", 401, "Unauthorized");
       next(error);
       return;
     }
@@ -23,9 +23,9 @@ const auth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
 
     if (!user) {
       const userNotFoundError = new CustomError(
-        "User not found",
+        "User with the provided id not found",
         404,
-        "User  with the provided id not found",
+        "User not found",
       );
       next(userNotFoundError);
       return;
@@ -36,9 +36,9 @@ const auth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
     next();
   } catch (error: unknown) {
     const customError = new CustomError(
-      "Invalid token",
-      401,
       (error as Error).message,
+      401,
+      "Invalid token",
     );
 
     next(customError);
