@@ -32,12 +32,12 @@ describe("Given a GET '/' endpoint", () => {
 
       await request(app)
         .get(endpoint)
-        .set("Authorization", "bearer")
+        .set("Authorization", "Bearer token")
         .expect(200);
 
       const response = await request(app)
         .get(endpoint)
-        .set("Authorization", "bearer");
+        .set("Authorization", "Beare r");
 
       expect(response.body).toHaveProperty("message", "Pong 🏓");
     });

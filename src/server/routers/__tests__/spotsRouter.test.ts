@@ -3,12 +3,12 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import app from "../../app.js";
 import connectToDatabase from "../../../database/connectToDatabase.js";
 import Spot from "../../../database/models/Spot.js";
-import { authIdMock, spotsMock, userMock } from "../../../mocks/spotsMock.js";
 import admin from "firebase-admin";
 import { type DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 import mongoose from "mongoose";
 import { type SpotStructure } from "../../../types.js";
 import User from "../../../database/models/User.js";
+import { authIdMock, spotsMock, userMock } from "../../../mocks/spotsMock.js";
 
 let server: MongoMemoryServer;
 
