@@ -24,7 +24,7 @@ describe("Given an generalErrorHandler error middleware", () => {
     });
 
     test("Then it should call it's json response method with the message 'Internal server error'", () => {
-      expect(res.json).toBeCalledWith({ error: customError.message });
+      expect(res.json).toBeCalledWith({ error: customError.publicMessage });
     });
   });
 
