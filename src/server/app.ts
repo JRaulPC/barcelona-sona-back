@@ -4,10 +4,9 @@ import express from "express";
 import morgan from "morgan";
 import { endpointNotFound, generalErrorHandler } from "./middlewares/errors.js";
 import corsOptions from "./corsOptions/corsOptions.js";
-import auth from "./middlewares/auth.js";
-import spotsRoutes from "./routers/spotsRouter.js";
 import paths from "../paths/paths.js";
 import pingController from "./controllers/pingController/pingController.js";
+import spotsRouter from "./routers/spotsRouter.js";
 
 export const app = express();
 
@@ -17,10 +16,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.disable("x-powered-by");
 
-app.use(paths.slash, pingController);
+app.use(paths.spots, spotsRouter);
 
-app.use(auth);
-app.use(paths.spots, spotsRoutes);
+app.get(paths.slash, pingController);
 
 app.use(endpointNotFound);
 app.use(generalErrorHandler);

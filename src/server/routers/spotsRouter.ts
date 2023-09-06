@@ -1,9 +1,10 @@
 import express from "express";
 import { getSpotsController } from "../controllers/spotsControllers/spotsControllers.js";
 import paths from "../../paths/paths.js";
+import auth from "../middlewares/auth.js";
 
-export const spotsRoutes = express.Router();
+export const spotsRouter = express.Router();
 
-spotsRoutes.get(paths.slash, getSpotsController);
+spotsRouter.get(paths.slash, auth, getSpotsController);
 
-export default spotsRoutes;
+export default spotsRouter;

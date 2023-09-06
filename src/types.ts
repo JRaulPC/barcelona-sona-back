@@ -1,6 +1,6 @@
 export interface UserStructure {
   _id: string;
-  authId: string;
+  uid: string;
   name: string;
 }
 
