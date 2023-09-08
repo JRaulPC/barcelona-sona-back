@@ -1,5 +1,5 @@
 const paths = {
-  slash: "/",
+  root: "/",
   spots: "/spots",
 };
 
