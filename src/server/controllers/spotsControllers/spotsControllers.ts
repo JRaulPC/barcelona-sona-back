@@ -1,16 +1,21 @@
-import { type NextFunction, type Request, type Response } from "express";
+import { type NextFunction, type Response } from "express";
 import Spot from "../../../database/models/Spot.js";
 import CustomError from "../../../CustomError/CustomError.js";
+import { type AuthRequest } from "../../middlewares/types.js";
+import { type SpotStructure } from "../../../types.js";
 
 export const getSpotsController = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction,
 ) => {
-  const requestLimit = 10;
-
   try {
-    const spots = await Spot.find().limit(requestLimit).exec();
+    const requestLimit = 10;
+    const _id = req.authId;
+
+    const spots = await Spot.find<SpotStructure[]>({ user: _id })
+      .limit(requestLimit)
+      .exec();
 
     res.status(200).json({ spots });
   } catch (error: unknown) {

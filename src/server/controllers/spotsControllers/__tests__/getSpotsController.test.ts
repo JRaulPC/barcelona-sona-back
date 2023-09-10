@@ -3,6 +3,7 @@ import { getSpotsController } from "../spotsControllers";
 import Spot from "../../../../database/models/Spot";
 import { spotsMock } from "../../../../mocks/spotsMock";
 import CustomError from "../../../../CustomError/CustomError";
+import { type AuthRequest } from "../../../middlewares/types";
 
 const req: Partial<Request> = {};
 const res: Partial<Response> = {
@@ -23,7 +24,7 @@ describe("Given a getSpotsController controller", () => {
       const expectedStatusCode = 200;
 
       await getSpotsController(
-        req as Request,
+        req as AuthRequest,
         res as Response,
         next as NextFunction,
       );
@@ -33,7 +34,7 @@ describe("Given a getSpotsController controller", () => {
 
     test("Then it should call it's json method with the spots 'La modelo' and 'Sagrada Familia'", async () => {
       await getSpotsController(
-        req as Request,
+        req as AuthRequest,
         res as Response,
         next as NextFunction,
       );
@@ -56,7 +57,7 @@ describe("Given a getSpotsController controller", () => {
       });
 
       await getSpotsController(
-        req as Request,
+        req as AuthRequest,
         res as Response,
         next as NextFunction,
       );
