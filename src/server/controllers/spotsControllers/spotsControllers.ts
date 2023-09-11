@@ -11,6 +11,7 @@ export const getSpotsController = async (
 ) => {
   try {
     const requestLimit = 10;
+
     const _id = req.authId;
 
     const spots = await Spot.find<SpotStructure[]>({ user: _id })
