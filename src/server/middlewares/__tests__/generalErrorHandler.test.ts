@@ -17,7 +17,7 @@ describe("Given an generalErrorHandler error middleware", () => {
       "Internal server error",
     );
 
-    test("Then it should call it's response status method with the status code '500'", () => {
+    test("Then it should call it  's response status method with the status code '500'", () => {
       generalErrorHandler(customError, req as Request, res as Response, next);
 
       expect(res.status).toBeCalledWith(customError.statusCode);
