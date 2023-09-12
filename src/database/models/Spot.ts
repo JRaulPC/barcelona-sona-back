@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
-import { type SpotStructure } from "../../types";
 
-const spotSchema = new Schema<SpotStructure>({
+const spotSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -23,7 +22,8 @@ const spotSchema = new Schema<SpotStructure>({
     required: true,
   },
   user: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
 });

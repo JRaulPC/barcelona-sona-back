@@ -14,7 +14,9 @@ export const app = express();
 app.use(cors(corsOptions));
 
 app.use(morgan("dev"));
+
 app.use(express.json());
+
 app.disable("x-powered-by");
 
 app.get(paths.root, pingController);
