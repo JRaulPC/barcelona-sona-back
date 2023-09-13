@@ -2,9 +2,9 @@ import { type Response, type NextFunction, type Request } from "express";
 import { deleteSpotByIdController } from "../spotsControllers";
 import Spot from "../../../../database/models/Spot";
 import CustomError from "../../../../CustomError/CustomError";
-import { modeloMockId } from "../../../../mocks/spotsMock";
+import { laModeloMockId } from "../../../../mocks/spotsMock";
 
-const req: Partial<Request> = { params: { spotId: modeloMockId } };
+const req: Partial<Request> = { params: { spotId: laModeloMockId } };
 const res: Partial<Response> = {
   status: jest.fn().mockReturnThis(),
   json: jest.fn(),
@@ -38,7 +38,7 @@ describe("Given a deleteSpotByIdController controller", () => {
       );
 
       expect(res.json).toBeCalledWith({
-        message: `Thing with the id ${modeloMockId} got deleted`,
+        message: `Thing with the id ${laModeloMockId} got deleted`,
       });
     });
 

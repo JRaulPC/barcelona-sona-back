@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { type UserStructure, type SpotStructure } from "../types";
 
-export const modeloMockId = "6hg54029hd839jdf";
+export const laModeloMockId = "6hg54029hd839jdf";
 
 export const authIdMock = "6efefte65f3fecknn5";
 
