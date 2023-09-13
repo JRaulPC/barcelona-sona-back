@@ -2,8 +2,7 @@ import { type Response, type NextFunction, type Request } from "express";
 import { deleteSpotByIdController } from "../spotsControllers";
 import Spot from "../../../../database/models/Spot";
 import CustomError from "../../../../CustomError/CustomError";
-
-const modeloMockId = "6hg54029hd839jdf";
+import { modeloMockId } from "../../../../mocks/spotsMock";
 
 const req: Partial<Request> = { params: { spotId: modeloMockId } };
 const res: Partial<Response> = {

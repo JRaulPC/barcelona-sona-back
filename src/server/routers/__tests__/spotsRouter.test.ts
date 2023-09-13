@@ -20,7 +20,7 @@ beforeAll(async () => {
   await connectToDatabase(dbUrl);
 });
 
-afterEach(async () => {
+afterAll(async () => {
   await mongoose.connection.close();
   await server.stop();
 });
@@ -36,6 +36,11 @@ admin.auth = jest.fn().mockReturnValue({
 beforeEach(async () => {
   await User.create(userMock);
   await Spot.create(spotsMock);
+});
+
+afterEach(async () => {
+  await Spot.deleteMany();
+  await User.deleteMany();
 });
 
 describe("Given a GET '/spots' endpoint", () => {
@@ -57,6 +62,20 @@ describe("Given a GET '/spots' endpoint", () => {
           spot.name,
         );
       });
+    });
+  });
+});
+
+describe("Given a DELETE '/spots:spotId endpoint'", () => {
+  describe("When it receives a request with the id of 'La modelo'", () => {
+    test("Then it should respond with a message 'The spot with the id: xxxxxx has been deleted", async () => {
+      const expectedStatusCode = 200;
+      const path = `/spots/${spotsMock[1]._id}`;
+
+      await request(app)
+        .delete(path)
+        .set("Authorization", "Bearer token")
+        .expect(expectedStatusCode);
     });
   });
 });
