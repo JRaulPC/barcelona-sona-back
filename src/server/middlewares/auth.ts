@@ -16,8 +16,7 @@ const auth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
       return;
     }
 
-    const userData = await admin.auth(firebaseApp).verifyIdToken(token);
-    const { uid } = userData;
+    const { uid } = await admin.auth(firebaseApp).verifyIdToken(token);
 
     const user = await User.findOne<UserStructure>({ uid }).exec();
 

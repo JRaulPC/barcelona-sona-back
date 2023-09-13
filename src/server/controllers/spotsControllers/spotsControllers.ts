@@ -1,4 +1,4 @@
-import { type NextFunction, type Response } from "express";
+import { type Request, type NextFunction, type Response } from "express";
 import Spot from "../../../database/models/Spot.js";
 import CustomError from "../../../CustomError/CustomError.js";
 import { type AuthRequest } from "../../middlewares/types.js";
@@ -23,6 +23,29 @@ export const getSpotsController = async (
     const customError = new CustomError(
       "Internal server error",
       500,
+      (error as Error).message,
+    );
+
+    next(customError);
+  }
+};
+
+export const deleteSpotByIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const { spotId } = req.params;
+  try {
+    await Spot.findByIdAndDelete({ _id: spotId }).exec();
+
+    res
+      .status(200)
+      .json({ message: `Thing with the id ${spotId} got deleted` });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      "Spot could not be deleted",
+      409,
       (error as Error).message,
     );
 
