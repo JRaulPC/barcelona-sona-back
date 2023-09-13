@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import { type UserStructure, type SpotStructure } from "../types";
 
-const userIdMongo = new mongoose.Types.ObjectId().toString();
+export const modeloMockId = "6hg54029hd839jdf";
+
 export const authIdMock = "6efefte65f3fecknn5";
 
+const userIdMongo = new mongoose.Types.ObjectId().toString();
 export const userMock: UserStructure = {
   _id: userIdMongo,
   uid: "6efefte65f3fecknn5",
