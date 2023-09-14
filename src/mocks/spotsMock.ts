@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { type UserStructure, type SpotStructure } from "../types";
 
-export const modeloMockId = "6hg54029hd839jdf";
+export const laModeloMockId = "6hg54029hd839jdf";
 
 export const authIdMock = "6efefte65f3fecknn5";
 
@@ -17,7 +17,7 @@ export const spotsMock: SpotStructure[] = [
     _id: new mongoose.Types.ObjectId().toString(),
     name: "La modelo",
     imageUrl: "https://modelotesturl/jpg.com",
-    opening: 1910,
+    openingYear: 1910,
     spotUse: "Jail",
     visited: true,
     description: "La modelo es una carcel contruida en el año...",
@@ -27,10 +27,19 @@ export const spotsMock: SpotStructure[] = [
     _id: new mongoose.Types.ObjectId().toString(),
     name: "Sagrada Familia",
     imageUrl: "https://sgradatesturl/jpg.com",
-    opening: 1810,
+    openingYear: 1810,
     spotUse: "Cathedral",
     visited: true,
     description: "La Sagrada Familia es una Catedral diseñada por...",
     user: userIdMongo,
   },
 ];
+
+export const postSpotMock: Partial<SpotStructure> = {
+  name: "La modelo",
+  imageUrl: "https://modelotesturl/jpg.com",
+  openingYear: 1910,
+  spotUse: "Jail",
+  visited: true,
+  user: userIdMongo,
+};

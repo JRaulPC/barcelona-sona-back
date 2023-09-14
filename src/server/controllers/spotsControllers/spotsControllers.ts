@@ -52,3 +52,26 @@ export const deleteSpotByIdController = async (
     next(customError);
   }
 };
+
+export const createSpotController = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const spot = req.body;
+
+    const userId = req.authId;
+
+    const newSpot = await Spot.create({ ...spot, user: userId });
+
+    res.status(201).json({ spot: newSpot });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      "Spot can't be created",
+      500,
+      (error as Error).message,
+    );
+    next(customError);
+  }
+};

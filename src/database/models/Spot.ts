@@ -9,7 +9,7 @@ const spotSchema = new Schema({
     type: String,
     required: true,
   },
-  opening: {
+  openingYear: {
     type: Number,
     required: true,
   },
