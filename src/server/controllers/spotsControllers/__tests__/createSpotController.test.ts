@@ -1,9 +1,9 @@
 import { type Response, type NextFunction, type Request } from "express";
 import { laModeloMockId, spotsMock } from "../../../../mocks/spotsMock";
 import { createSpotController } from "../spotsControllers";
-import { type SpotStructure } from "../../../../types";
 import Spot from "../../../../database/models/Spot";
 import CustomError from "../../../../CustomError/CustomError";
+import { type AuthRequest } from "../../../middlewares/types";
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -25,29 +25,13 @@ describe("Given a createSpotController controller", () => {
     test("Then it should call it's status method with a status code 201", async () => {
       const expectedStatusCode = 201;
 
-      await createSpotController(
-        req as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          SpotStructure
-        >,
-        res as Response,
-        next,
-      );
+      await createSpotController(req as AuthRequest, res as Response, next);
 
       expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
     });
 
     test("Then it should call it's json method with the spot 'La modelo'", async () => {
-      await createSpotController(
-        req as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          SpotStructure
-        >,
-        res as Response,
-        next,
-      );
+      await createSpotController(req as AuthRequest, res as Response, next);
 
       expect(res.json).toBeCalledWith({ spot: spotToCreate });
     });
@@ -63,15 +47,7 @@ describe("Given a createSpotController controller", () => {
 
       Spot.create = jest.fn().mockRejectedValue(error);
 
-      await createSpotController(
-        req as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          SpotStructure
-        >,
-        res as Response,
-        next,
-      );
+      await createSpotController(req as AuthRequest, res as Response, next);
 
       expect(next).toHaveBeenCalledWith(error);
     });

@@ -13,9 +13,9 @@ export const app = express();
 
 app.use(cors(corsOptions));
 
-app.use(morgan("dev"));
-
 app.use(express.json());
+
+app.use(morgan("dev"));
 
 app.disable("x-powered-by");
 

@@ -54,14 +54,16 @@ export const deleteSpotByIdController = async (
 };
 
 export const createSpotController = async (
-  req: Request<Record<string, unknown>, Record<string, unknown>, SpotStructure>,
+  req: AuthRequest,
   res: Response,
   next: NextFunction,
 ) => {
   try {
     const spot = req.body;
 
-    const newSpot = await Spot.create(spot);
+    const userId = req.authId;
+
+    const newSpot = await Spot.create({ ...spot, user: userId });
 
     res.status(201).json({ spot: newSpot });
   } catch (error: unknown) {
