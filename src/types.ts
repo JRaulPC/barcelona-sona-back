@@ -8,7 +8,7 @@ export interface SpotStructure {
   _id: string;
   name: string;
   imageUrl: string;
-  opening: number;
+  openingYear: number;
   spotUse: string;
   visited: boolean;
   description: string;
