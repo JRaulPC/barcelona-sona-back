@@ -3,6 +3,9 @@ import Spot from "../../../database/models/Spot.js";
 import CustomError from "../../../CustomError/CustomError.js";
 import { type AuthRequest } from "../../middlewares/types.js";
 import { type SpotStructure } from "../../../types.js";
+import debugCreator from "debug";
+
+const debug = debugCreator("spots:server:controller");
 
 export const getSpotsController = async (
   req: AuthRequest,
@@ -69,6 +72,38 @@ export const createSpotController = async (
   } catch (error: unknown) {
     const customError = new CustomError(
       "Spot can't be created",
+      500,
+      (error as Error).message,
+    );
+    next(customError);
+  }
+};
+
+export const getSpotByIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const { spotId } = req.params;
+
+  try {
+    const spot = await Spot.findById({ _id: spotId }).exec();
+
+    if (!spot) {
+      const newError = new CustomError(
+        "Error, can't find spot!",
+        404,
+        "Error, can't find spot!",
+      );
+      next(newError);
+      debug(`Error, can't get thing with id ${spotId}`);
+      return;
+    }
+
+    res.status(200).json({ spot });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      "Error, can't get thing",
       500,
       (error as Error).message,
     );
