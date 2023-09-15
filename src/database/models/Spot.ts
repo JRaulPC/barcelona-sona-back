@@ -17,7 +17,7 @@ const spotSchema = new Schema({
     type: String,
     required: true,
   },
-  visited: {
+  isVisited: {
     type: Boolean,
     required: true,
   },

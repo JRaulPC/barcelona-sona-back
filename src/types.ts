@@ -5,12 +5,12 @@ export interface UserStructure {
 }
 
 export interface SpotStructure {
-  _id: string;
+  _id?: string;
   name: string;
   imageUrl: string;
   openingYear: number;
   spotUse: string;
-  visited: boolean;
-  description: string;
+  isVisited: boolean;
+  description?: string;
   user: string;
 }
