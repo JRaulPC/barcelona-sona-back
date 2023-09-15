@@ -43,3 +43,14 @@ export const postSpotMock: Partial<SpotStructure> = {
   isVisited: true,
   user: userIdMongo,
 };
+
+export const spotMock: SpotStructure = {
+  _id: new mongoose.Types.ObjectId().toString(),
+  name: "Sala apolo",
+  imageUrl: "https://apolotestul/jpg.com",
+  openingYear: 1910,
+  spotUse: "club",
+  isVisited: true,
+  description: "La apolo es una sala contruida en el año...",
+  user: userIdMongo,
+};

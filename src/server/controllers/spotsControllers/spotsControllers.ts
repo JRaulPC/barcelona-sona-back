@@ -42,9 +42,7 @@ export const deleteSpotByIdController = async (
   try {
     await Spot.findByIdAndDelete({ _id: spotId }).exec();
 
-    res
-      .status(200)
-      .json({ message: `Thing with the id ${spotId} got deleted` });
+    res.status(200).json({ message: `Spot with the id ${spotId} got deleted` });
   } catch (error: unknown) {
     const customError = new CustomError(
       "Spot could not be deleted",
@@ -96,14 +94,14 @@ export const getSpotByIdController = async (
         "Error, can't find spot!",
       );
       next(newError);
-      debug(`Error, can't get thing with id ${spotId}`);
+      debug(`Error, can't get Spot with id ${spotId}`);
       return;
     }
 
     res.status(200).json({ spot });
   } catch (error: unknown) {
     const customError = new CustomError(
-      "Error, can't get thing",
+      "Error, can't get Spot",
       500,
       (error as Error).message,
     );
