@@ -18,7 +18,7 @@ describe("Given a deleteSpotByIdController controller", () => {
       exec: jest.fn().mockResolvedValue({}),
     });
 
-    test("Then it should return a response with status code 200", async () => {
+    test("Then it should call it's status method 200", async () => {
       const expectedStatusCode = 200;
 
       await deleteSpotByIdController(
@@ -30,7 +30,7 @@ describe("Given a deleteSpotByIdController controller", () => {
       expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
     });
 
-    test("Then it should call it's json method with the message 'Thing with the id 6hg54029hd839jdf got deleted' ", async () => {
+    test("Then it should call it's json method with the message 'Spot with the id 6hg54029hd839jdf got deleted' ", async () => {
       await deleteSpotByIdController(
         req as Request,
         res as Response,
@@ -38,7 +38,7 @@ describe("Given a deleteSpotByIdController controller", () => {
       );
 
       expect(res.json).toBeCalledWith({
-        message: `Thing with the id ${laModeloMockId} got deleted`,
+        message: `Spot with the id ${laModeloMockId} got deleted`,
       });
     });
 
