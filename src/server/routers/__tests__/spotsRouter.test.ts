@@ -11,6 +11,8 @@ import User from "../../../database/models/User.js";
 import {
   authIdMock,
   postSpotMock,
+  spotMock,
+  spotMockId,
   spotsMock,
   userMock,
 } from "../../../mocks/spotsMock.js";
@@ -87,7 +89,7 @@ describe("Given a DELETE '/spots:spotId endpoint'", () => {
 
 describe("Given a POST '/spots' endpoint", () => {
   describe("When it receives a request with the spot 'La modelo'", () => {
-    test("Then is should respond with a message ", async () => {
+    test("Then is should respond with a status code 201 ", async () => {
       const expectedStatusCode = 201;
       const path = "/spots";
 
@@ -96,6 +98,26 @@ describe("Given a POST '/spots' endpoint", () => {
         .send(postSpotMock)
         .set("Authorization", "Bearer token")
         .expect(expectedStatusCode);
+    });
+  });
+});
+
+describe("Given a GET '/spots/spotmockId' endpoint", () => {
+  describe("When it receives a request with the id from the spot from 'Sala Apolo'", () => {
+    test("Then it should responed with the spot 'Sala Apolo' and a 200", async () => {
+      const expectedStatusCode = 200;
+      const path = `/spots/${spotMockId}`;
+      await Spot.create(spotMock);
+
+      const response = await request(app)
+        .get(path)
+        .send(postSpotMock)
+        .set("Authorization", "Bearer token")
+        .expect(expectedStatusCode);
+
+      const responseBody = response.body as { spot: SpotStructure };
+
+      expect(responseBody.spot).toHaveProperty("name", spotMock.name);
     });
   });
 });
