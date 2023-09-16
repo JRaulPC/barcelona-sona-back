@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import { type UserStructure, type SpotStructure } from "../types";
 
-export const laModeloMockId = "6hg54029hd839jdf";
-
 export const authIdMock = "6efefte65f3fecknn5";
 
 const userIdMongo = new mongoose.Types.ObjectId().toString();
@@ -12,6 +10,7 @@ export const userMock: UserStructure = {
   name: "Juan",
 };
 
+export const laModeloMockId = "6hg54029hd839jdf";
 export const spotsMock: SpotStructure[] = [
   {
     _id: new mongoose.Types.ObjectId().toString(),
@@ -41,13 +40,16 @@ export const postSpotMock: Partial<SpotStructure> = {
   openingYear: 1910,
   spotUse: "Jail",
   isVisited: true,
+  description: "La modelo es una carcel contruida en el año...",
   user: userIdMongo,
 };
 
+export const spotMockId = new mongoose.Types.ObjectId().toString();
+
 export const spotMock: SpotStructure = {
-  _id: new mongoose.Types.ObjectId().toString(),
+  _id: spotMockId,
   name: "Sala apolo",
-  imageUrl: "https://apolotestul/jpg.com",
+  imageUrl: "https://apolotesturl/jpg.com",
   openingYear: 1910,
   spotUse: "club",
   isVisited: true,
