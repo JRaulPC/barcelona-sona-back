@@ -103,7 +103,7 @@ describe("Given a POST '/spots' endpoint", () => {
 });
 
 describe("Given a GET '/spots/spotmockId' endpoint", () => {
-  describe("When it receives a request with the id from the spot from 'Sala Apolo'", () => {
+  describe("When it receives a request with the id from the spot 'Sala Apolo'", () => {
     test("Then it should responed with the spot 'Sala Apolo' and a 200", async () => {
       const expectedStatusCode = 200;
       const path = `/spots/${spotMockId}`;
@@ -118,6 +118,26 @@ describe("Given a GET '/spots/spotmockId' endpoint", () => {
       const responseBody = response.body as { spot: SpotStructure };
 
       expect(responseBody.spot).toHaveProperty("name", spotMock.name);
+    });
+  });
+});
+
+describe("Given a PUT '/spots/spotmockId' endpoint", () => {
+  describe("When it receives a request with the id from the spot 'Sala Apolo'", () => {
+    test("Then it should responed with the spot 'Sala Apolo' with the property isVisited as false and a 200", async () => {
+      const expectedStatusCode = 200;
+      const path = `/spots/${spotMockId}`;
+      await Spot.create(spotMock);
+
+      const response = await request(app)
+        .patch(path)
+        .send(spotMock)
+        .set("Authorization", "Bearer token")
+        .expect(expectedStatusCode);
+
+      const responseBody = response.body as { spot: SpotStructure };
+
+      expect(responseBody.spot).toHaveProperty("isVisited", false);
     });
   });
 });
