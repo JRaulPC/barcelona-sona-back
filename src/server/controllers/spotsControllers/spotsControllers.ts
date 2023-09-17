@@ -108,3 +108,44 @@ export const getSpotByIdController = async (
     next(customError);
   }
 };
+
+export const toogleIsVisitedByIdController = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  const spot = req.body;
+  const { spotId } = req.params;
+
+  try {
+    const updatedSpot = await Spot.findByIdAndUpdate(
+      spotId,
+      {
+        isVisited: !spot.isVisited,
+      },
+      {
+        returnDocument: "after",
+      },
+    ).exec();
+
+    if (!updatedSpot) {
+      const newError = new CustomError(
+        "Error, can't find spot!",
+        404,
+        "Error, can't find spot!",
+      );
+      next(newError);
+      debug(`Error, can't update spot with id ${spot._id}`);
+      return;
+    }
+
+    res.status(200).json({ spot: updatedSpot });
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      "Spot, can't be updated",
+      409,
+      (error as Error).message,
+    );
+    next(customError);
+  }
+};
