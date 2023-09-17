@@ -135,14 +135,15 @@ export const toogleIsVisitedByIdController = async (
         "Error, can't find spot!",
       );
       next(newError);
-      debug(`Error, can't get Spot with id ${spot._id}`);
+      debug(`Error, can't update spot with id ${spot._id}`);
+      return;
     }
 
     res.status(200).json({ spot: updatedSpot });
   } catch (error: unknown) {
     const customError = new CustomError(
-      "Error, can't update spot",
-      500,
+      "Spot, can't be updated",
+      409,
       (error as Error).message,
     );
     next(customError);

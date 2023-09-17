@@ -22,7 +22,7 @@ describe("Given a createSpotController controller", () => {
     const spotToCreate = spotsMock[1];
     Spot.create = jest.fn().mockReturnValue(spotToCreate);
 
-    test("Then it should call it's status method with a status code 201", async () => {
+    test("Then it should call it's status method with a 201", async () => {
       const expectedStatusCode = 201;
 
       await createSpotController(req as AuthRequest, res as Response, next);
