@@ -63,7 +63,7 @@ export const toogledIsVisitedSpotMock: SpotStructure = {
   imageUrl: "https://apolotesturl/jpg.com",
   openingYear: 1910,
   spotUse: "club",
-  isVisited: false,
+  isVisited: true,
   description: "La apolo es una sala contruida en el año...",
   user: userIdMongo,
 };
