@@ -3,7 +3,7 @@ import { laModeloMockId, spotsMock } from "../../../../mocks/spotsMock";
 import { createSpotController } from "../spotsControllers";
 import Spot from "../../../../database/models/Spot";
 import CustomError from "../../../../CustomError/CustomError";
-import { type AuthRequest } from "../../../middlewares/types";
+import { type AuthRequest } from "../../../types";
 
 beforeEach(() => {
   jest.clearAllMocks();

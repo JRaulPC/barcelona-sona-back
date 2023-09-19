@@ -1,9 +1,13 @@
-import { type Request, type NextFunction, type Response } from "express";
-import Spot from "../../../database/models/Spot.js";
-import CustomError from "../../../CustomError/CustomError.js";
-import { type AuthRequest } from "../../middlewares/types.js";
-import { type SpotStructure } from "../../../types.js";
 import debugCreator from "debug";
+import { type NextFunction, type Request, type Response } from "express";
+import CustomError from "../../../CustomError/CustomError.js";
+import Spot from "../../../database/models/Spot.js";
+import { type SpotStructure } from "../../../types.js";
+import {
+  type AuthRequest,
+  type AuthRequestWithSpot,
+  type AuthRequestWithSpotToggle,
+} from "../../types.js";
 
 const debug = debugCreator("spots:server:controller");
 
@@ -39,10 +43,13 @@ export const deleteSpotByIdController = async (
   next: NextFunction,
 ) => {
   const { spotId } = req.params;
+
   try {
     await Spot.findByIdAndDelete({ _id: spotId }).exec();
 
-    res.status(200).json({ message: `Spot with the id ${spotId} got deleted` });
+    res
+      .status(200)
+      .json({ message: `Spot with the id ${spotId} has been deleted` });
   } catch (error: unknown) {
     const customError = new CustomError(
       "Spot could not be deleted",
@@ -55,7 +62,7 @@ export const deleteSpotByIdController = async (
 };
 
 export const createSpotController = async (
-  req: AuthRequest,
+  req: AuthRequestWithSpot,
   res: Response,
   next: NextFunction,
 ) => {
@@ -110,18 +117,18 @@ export const getSpotByIdController = async (
 };
 
 export const toogleIsVisitedByIdController = async (
-  req: AuthRequest,
+  req: AuthRequestWithSpotToggle,
   res: Response,
   next: NextFunction,
 ) => {
-  const spot = req.body;
+  const isVisited = req.body === "true";
   const { spotId } = req.params;
 
   try {
     const updatedSpot = await Spot.findByIdAndUpdate(
       spotId,
       {
-        isVisited: !spot.isVisited,
+        isVisited: !isVisited,
       },
       {
         returnDocument: "after",
@@ -135,7 +142,7 @@ export const toogleIsVisitedByIdController = async (
         "Error, can't find spot!",
       );
       next(newError);
-      debug(`Error, can't update spot with id ${spot._id}`);
+      debug(`Error, can't update spot with id`);
       return;
     }
 

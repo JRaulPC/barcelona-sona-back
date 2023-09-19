@@ -1,12 +1,16 @@
 import { type NextFunction, type Response } from "express";
 import admin from "firebase-admin";
-import { type AuthRequest } from "./types";
 import CustomError from "../../CustomError/CustomError.js";
-import firebaseApp from "../../firebase.js";
 import User from "../../database/models/User.js";
+import firebaseApp from "../../firebase.js";
 import { type UserStructure } from "../../types";
+import { type AuthRequestWithSpot } from "../types.js";
 
-const auth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
+const auth = async (
+  req: AuthRequestWithSpot,
+  _res: Response,
+  next: NextFunction,
+) => {
   try {
     const token = req.header("Authorization")?.replace("Bearer ", "");
 

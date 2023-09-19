@@ -14,6 +14,7 @@ import {
   spotMock,
   spotMockId,
   spotsMock,
+  toogledIsVisitedSpotMock,
   userMock,
 } from "../../../mocks/spotsMock.js";
 
@@ -75,29 +76,39 @@ describe("Given a GET '/spots' endpoint", () => {
 
 describe("Given a DELETE '/spots:spotId endpoint'", () => {
   describe("When it receives a request with the id of 'La modelo'", () => {
-    test("Then it should respond with a message 'The spot with the id: '6668h4iuf9rfaksdjf' has been deleted", async () => {
+    test("Then it should respond with a message 'The spot with the id: 'spotsMock[1]._id' has been deleted", async () => {
       const expectedStatusCode = 200;
       const path = `/spots/${spotsMock[1]._id}`;
 
-      await request(app)
+      const succesMessage = `Spot with the id ${spotsMock[1]._id} has been deleted`;
+
+      const response = await request(app)
         .delete(path)
         .set("Authorization", "Bearer token")
         .expect(expectedStatusCode);
+
+      const responseBody = response.body as { message: string };
+
+      expect(responseBody).toHaveProperty("message", succesMessage);
     });
   });
 });
 
 describe("Given a POST '/spots' endpoint", () => {
   describe("When it receives a request with the spot 'La modelo'", () => {
-    test("Then is should respond with a status code 201 ", async () => {
+    test("Then is should respond with a status code 201 and the spot 'La modelo' ", async () => {
       const expectedStatusCode = 201;
       const path = "/spots";
 
-      await request(app)
+      const response = await request(app)
         .post(path)
         .send(postSpotMock)
         .set("Authorization", "Bearer token")
         .expect(expectedStatusCode);
+
+      const responseBody = response.body as { spot: SpotStructure };
+
+      expect(responseBody.spot).toHaveProperty("name", postSpotMock.name);
     });
   });
 });
@@ -124,20 +135,20 @@ describe("Given a GET '/spots/spotmockId' endpoint", () => {
 
 describe("Given a PUT '/spots/spotmockId' endpoint", () => {
   describe("When it receives a request with the id from the spot 'Sala Apolo'", () => {
-    test("Then it should responed with the spot 'Sala Apolo' with the property isVisited as false and a 200", async () => {
+    test("Then it should responed with the spot 'Sala Apolo' with the property isVisited as true and a 200", async () => {
       const expectedStatusCode = 200;
       const path = `/spots/${spotMockId}`;
-      await Spot.create(spotMock);
+      await Spot.create(toogledIsVisitedSpotMock);
 
       const response = await request(app)
         .patch(path)
-        .send(spotMock)
         .set("Authorization", "Bearer token")
+        .send("true")
         .expect(expectedStatusCode);
 
       const responseBody = response.body as { spot: SpotStructure };
 
-      expect(responseBody.spot).toHaveProperty("isVisited", false);
+      expect(responseBody.spot).toHaveProperty("isVisited", true);
     });
   });
 });

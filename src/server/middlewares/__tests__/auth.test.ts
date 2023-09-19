@@ -1,6 +1,6 @@
 import admin from "firebase-admin";
 import { type DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
-import { type AuthRequest } from "../types";
+import { type AuthRequestWithSpot, type AuthRequest } from "../../types";
 import { type NextFunction, type Response, type Request } from "express";
 import auth from "../auth";
 import CustomError from "../../../CustomError/CustomError";
@@ -50,7 +50,7 @@ describe("Given an authentification middleware", () => {
           .fn()
           .mockReturnValue({ exec: jest.fn().mockResolvedValue(undefined) });
 
-        await auth(req as AuthRequest, res as Response, next);
+        await auth(req as AuthRequestWithSpot, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(userNotFoundError);
       });

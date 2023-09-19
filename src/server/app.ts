@@ -13,7 +13,7 @@ export const app = express();
 
 app.use(cors(corsOptions));
 
-app.use(express.json());
+app.use(express.json(), express.text());
 
 app.use(morgan("dev"));
 
@@ -22,6 +22,7 @@ app.disable("x-powered-by");
 app.get(paths.root, pingController);
 
 app.use(auth);
+
 app.use(paths.spots, spotsRouter);
 
 app.use(endpointNotFound);

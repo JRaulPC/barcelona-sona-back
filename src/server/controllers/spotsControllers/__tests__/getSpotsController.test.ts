@@ -3,7 +3,7 @@ import { getSpotsController } from "../spotsControllers";
 import Spot from "../../../../database/models/Spot";
 import { spotsMock } from "../../../../mocks/spotsMock";
 import CustomError from "../../../../CustomError/CustomError";
-import { type AuthRequest } from "../../../middlewares/types";
+import { type AuthRequest } from "../../../types";
 
 const req: Partial<Request> = {};
 const res: Partial<Response> = {

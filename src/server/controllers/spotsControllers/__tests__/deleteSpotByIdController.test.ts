@@ -38,7 +38,7 @@ describe("Given a deleteSpotByIdController controller", () => {
       );
 
       expect(res.json).toBeCalledWith({
-        message: `Spot with the id ${laModeloMockId} got deleted`,
+        message: `Spot with the id ${laModeloMockId} has been deleted`,
       });
     });
 
