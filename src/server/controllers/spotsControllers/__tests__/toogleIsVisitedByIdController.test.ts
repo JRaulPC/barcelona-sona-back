@@ -5,7 +5,7 @@ import {
   spotMockId,
   toogledIsVisitedSpotMock,
 } from "../../../../mocks/spotsMock";
-import { type AuthRequest } from "../../../middlewares/types";
+import { type AuthRequest } from "../../../types";
 import { toogleIsVisitedByIdController } from "../spotsControllers";
 import CustomError from "../../../../CustomError/CustomError";
 
