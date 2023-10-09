@@ -9,7 +9,7 @@ import {
   type AuthRequestWithSpotToggle,
 } from "../../types.js";
 
-const debug = debugCreator("spots:server:controller");
+const debug = debugCreator("spots:server:controller:spots");
 
 export const getSpotsController = async (
   req: AuthRequest,

@@ -3,7 +3,6 @@ import admin from "firebase-admin";
 import CustomError from "../../CustomError/CustomError.js";
 import User from "../../database/models/User.js";
 import firebaseApp from "../../firebase.js";
-import { type UserStructure } from "../../types";
 import { type AuthRequestWithSpot } from "../types.js";
 
 const auth = async (
@@ -22,7 +21,7 @@ const auth = async (
 
     const { uid } = await admin.auth(firebaseApp).verifyIdToken(token);
 
-    const user = await User.findOne<UserStructure>({ uid }).exec();
+    const user = await User.findOne({ uid }).exec();
 
     if (!user) {
       const userNotFoundError = new CustomError(
