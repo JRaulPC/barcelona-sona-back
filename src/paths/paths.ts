@@ -1,5 +1,6 @@
 const paths = {
   root: "/",
+  signUp: "/registrar",
   spots: "/spots",
 };
 
