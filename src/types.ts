@@ -1,7 +1,9 @@
 export interface UserStructure {
   _id: string;
-  uid: string;
+  uid?: string;
   name: string;
+  password?: string;
+  email?: string;
 }
 
 export interface SpotStructure {
